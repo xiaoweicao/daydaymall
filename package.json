@@ -1,0 +1,19 @@
+{
+  "name": "daydaymall",
+  "version": "1.0.0",
+  "description": "这是一个vue的项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoweicao/daydaymall.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiaoweicao/daydaymall/issues"
+  },
+  "homepage": "https://github.com/xiaoweicao/daydaymall#readme"
+}
