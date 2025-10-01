@@ -1,0 +1,25 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+
+// 独立运行时
+if (!window.__POWERED_BY_QIANKUN__) {
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+}
+
+// 导出生命周期函数
+export async function bootstrap() {
+  console.log('Vite app bootstraped');
+}
+
+export async function mount(props) {
+  console.log('Vite app mount', props);
+  const container = props.container ? props.container.querySelector('#root') : document.getElementById('root');
+  ReactDOM.createRoot(container).render(<App />);
+}
+
+export async function unmount(props) {
+  console.log('Vite app unmount', props);
+  const container = props.container ? props.container.querySelector('#root') : document.getElementById('root');
+  container.innerHTML = '';
+}
