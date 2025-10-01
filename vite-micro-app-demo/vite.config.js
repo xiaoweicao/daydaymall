@@ -4,13 +4,22 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   build: {
-    // 默认情况下不会生成manifest文件
-    outDir: 'dist',
+    // 启用manifest文件生成
+    manifest: 'manifest.json',
+    // 配置为库模式，适合微前端
+    lib: {
+      entry: 'src/main.jsx',
+      name: 'ViteMicroApp',
+      fileName: (format) => `micro-app.${format}.js`,
+      formats: ['es', 'umd']
+    },
     rollupOptions: {
+      external: ['react', 'react-dom'],
       output: {
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
       }
     }
   }
