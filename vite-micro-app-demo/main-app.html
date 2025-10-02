@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微前端主应用</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        nav {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            background: #ddd;
+        }
+        #subapp-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            min-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>微前端主应用</h1>
+    
+    <nav>
+        <a href="/app1">应用1</a>
+        <a href="/app2">应用2</a>
+        <a href="/app3">应用3</a>
+    </nav>
+    
+    <div id="subapp-container">
+        <p>请选择一个应用</p>
+    </div>
+
+    <script src="./main-app-loader.js"></script>
+    <script>
+        // 初始化微前端加载器
+        const microFrontend = new ViteMicroFrontendLoader();
+
+        // 注册应用
+        microFrontend.registerApp('app1', {
+            baseUrl: 'https://cdn.example.com/micro-apps/app1/v1.2.3',
+            activeRule: '/app1'
+        });
+
+        microFrontend.registerApp('app2', {
+            baseUrl: 'https://cdn.example.com/micro-apps/app2/v2.1.0',
+            activeRule: '/app2'
+        });
+
+        microFrontend.registerApp('app3', {
+            baseUrl: 'https://cdn.example.com/micro-apps/app3/v1.0.5',
+            activeRule: '/app3'
+        });
+
+        // 监听路由变化
+        window.addEventListener('popstate', () => {
+            microFrontend.handleRoute(window.location.pathname);
+        });
+
+        // 处理导航点击
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const path = e.target.getAttribute('href');
+                window.history.pushState(null, '', path);
+                microFrontend.handleRoute(path);
+            }
+        });
+
+        // 初始路由
+        microFrontend.handleRoute(window.location.pathname);
+    </script>
+</body>
+</html>
