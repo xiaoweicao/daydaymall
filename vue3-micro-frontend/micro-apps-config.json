@@ -1,0 +1,21 @@
+// API配置文件 - micro-apps-config.json
+{
+  "auth": {
+    "name": "auth",
+    "baseUrl": "https://cdn.example.com/micro-apps/auth/latest",
+    "activeRule": "/login",
+    "version": "latest"
+  },
+  "business": {
+    "name": "business", 
+    "baseUrl": "https://cdn.example.com/micro-apps/business/latest",
+    "activeRule": "/dashboard",
+    "version": "latest"
+  },
+  "settings": {
+    "name": "settings",
+    "baseUrl": "https://cdn.example.com/micro-apps/settings/latest", 
+    "activeRule": "/settings",
+    "version": "latest"
+  }
+}
